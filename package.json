@@ -7,9 +7,9 @@
     "build": "echo 'No build needed'"
   },
   "dependencies": {
-    "mongoose": "^7.0.0",
-    "@sendgrid/mail": "^7.7.0",
-    "twilio": "^3.86.0",
-    "dotenv": "^16.0.3"
+    "mongoose": "^8.0.0",
+    "@sendgrid/mail": "^8.1.0",
+    "twilio": "^4.22.0",
+    "dotenv": "^16.3.1"
   }
 }
