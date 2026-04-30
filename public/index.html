@@ -3,170 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Señalización Profesional | Señales CR</title>
+    <title>Señales CR | Señalización Vial, Rotulación y Seguridad - Costa Rica</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f9f9f9; }
-        header { background: #1a3a52; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: bold; font-size: 1.2rem; }
-        nav { display: flex; gap: 30px; align-items: center; }
-        nav a { color: white; text-decoration: none; transition: color 0.3s; }
-        nav a:hover { color: #2d5a7b; }
-        .btn-whatsapp { background: #25D366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; }
-        .hero { background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%); color: white; padding: 80px 40px; text-align: center; }
-        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
-        .hero p { font-size: 1.2rem; margin-bottom: 40px; color: #ddd; }
-        .btn { padding: 15px 40px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; transition: all 0.3s; }
-        .btn-primary { background: #2d5a7b; color: white; }
-        .btn-primary:hover { background: #1a3a52; }
-        .btn-secondary { background: transparent; color: white; border: 2px solid white; }
-        .btn-secondary:hover { border-color: #2d5a7b; color: #2d5a7b; }
-        .servicios { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
-        .servicios h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; color: #1a3a52; }
-        .servicios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-        .servicio-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-top: 3px solid #2d5a7b; }
-        .servicio-card:hover { transform: translateY(-5px); }
-        .stats { background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%); color: white; padding: 60px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; max-width: 1200px; margin: 60px auto; border-radius: 12px; }
-        .stat-item h3 { font-size: 2.5rem; color: #2d5a7b; margin-bottom: 10px; }
-        .formulario-section { padding: 80px 40px; max-width: 600px; margin: 0 auto; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; line-height: 1.6; background: #0f1419; }
+
+        /* ==================== NAVBAR ==================== */
+        header { background: #0f1419; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 193, 7, 0.2); }
+        .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: white; font-size: 1.1rem; }
+        .logo-icon { width: 45px; height: 45px; background: #ffc107; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #0f1419; }
+        nav { display: flex; gap: 40px; align-items: center; }
+        nav a { color: white; text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; transition: color 0.3s; }
+        nav a:hover { color: #ffc107; }
+        nav a.active { color: #ffc107; border-bottom: 2px solid #ffc107; padding-bottom: 5px; }
+        .btn-whatsapp { background: #ffc107; color: #0f1419; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85rem; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-whatsapp:hover { background: #ffb300; transform: translateY(-2px); }
+
+        /* ==================== HERO ==================== */
+        .hero { background: linear-gradient(135deg, #0f1419 0%, #1a2847 50%, #0f1419 100%); position: relative; padding: 80px 40px; color: white; overflow: hidden; }
+        .hero-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-text h2 { font-size: 0.95rem; font-weight: 700; text-transform: uppercase; color: #bbb; margin-bottom: 20px; letter-spacing: 2px; }
+        .hero-text h1 { font-size: 3.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 30px; }
+        .hero-text h1 span { color: #ffc107; }
+        .hero-text p { color: #bbb; font-size: 1rem; margin-bottom: 30px; line-height: 1.7; }
+        .hero-buttons { display: flex; gap: 20px; margin-bottom: 40px; flex-wrap: wrap; }
+        .btn-primary { background: #ffc107; color: #0f1419; padding: 14px 30px; border-radius: 6px; text-decoration: none; font-weight: 700; border: none; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .btn-primary:hover { background: #ffb300; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3); }
+        .btn-secondary { background: transparent; color: white; padding: 14px 30px; border-radius: 6px; text-decoration: none; font-weight: 700; border: 2px solid white; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .btn-secondary:hover { border-color: #ffc107; color: #ffc107; }
+        .hero-social { display: flex; align-items: center; gap: 15px; color: #bbb; font-size: 0.9rem; }
+        .avatars { display: flex; align-items: center; }
+        .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ffc107, #ff6b35); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.7rem; margin-right: -10px; border: 2px solid #0f1419; }
+        .hero-image { position: relative; height: 500px; }
+        .hero-image-box { background: linear-gradient(135deg, #1a2847 0%, #0f1419 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 8rem; color: rgba(255, 193, 7, 0.1); overflow: hidden; position: relative; }
+        .hero-image-box::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(255, 193, 7, 0.05) 0%, transparent 70%); }
+        .hero-features { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(255, 193, 7, 0.05); border: 1px solid rgba(255, 193, 7, 0.2); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); }
+        .feature-item { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; color: white; font-size: 0.9rem; }
+        .feature-item:last-child { margin-bottom: 0; }
+        .feature-icon { width: 40px; height: 40px; background: rgba(255, 193, 7, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+
+        /* ==================== SERVICIOS ==================== */
+        .servicios-section { background: #0f1419; padding: 80px 40px; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-label { color: #ffc107; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 15px; }
+        .section-title h2 { color: white; font-size: 2.5rem; font-weight: 800; }
+        .servicios-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .servicio-card { background: rgba(255, 193, 7, 0.05); border: 1px solid rgba(255, 193, 7, 0.2); border-radius: 12px; padding: 30px; transition: all 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+        .servicio-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #ffc107; }
+        .servicio-card:hover { background: rgba(255, 193, 7, 0.1); border-color: #ffc107; transform: translateY(-5px); }
+        .servicio-icon { font-size: 2.5rem; margin-bottom: 20px; }
+        .servicio-card h3 { color: white; font-size: 1.2rem; margin-bottom: 15px; font-weight: 700; }
+        .servicio-card p { color: #bbb; font-size: 0.9rem; line-height: 1.6; margin-bottom: 15px; }
+        .servicio-link { color: #ffc107; text-decoration: none; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: gap 0.3s; }
+        .servicio-link:hover { gap: 12px; }
+
+        /* ==================== STATS ==================== */
+        .stats-section { background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(255, 193, 7, 0.05) 100%); padding: 50px 40px; max-width: 1100px; margin: 60px auto; border-radius: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
+        .stat-item h3 { color: #ffc107; font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; }
+        .stat-item p { color: #bbb; font-size: 0.95rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+
+        /* ==================== PROYECTOS ==================== */
+        .proyectos-section { background: #0f1419; padding: 80px 40px; }
+        .proyectos-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+        .proyectos-header h2 { color: white; font-size: 2.5rem; font-weight: 800; }
+        .ver-todos { color: #ffc107; text-decoration: none; font-weight: 700; transition: color 0.3s; }
+        .ver-todos:hover { color: #ffb300; }
+        .proyectos-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+        .proyecto-card { background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%); border-radius: 12px; height: 250px; overflow: hidden; cursor: pointer; transition: all 0.3s; position: relative; }
+        .proyecto-card:hover { transform: translateY(-10px); }
+        .proyecto-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%); }
+
+        /* ==================== PROCESO ==================== */
+        .proceso-section { background: linear-gradient(135deg, #1a2847 0%, #0f1419 100%); padding: 80px 40px; }
+        .proceso-section h2 { color: white; font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 60px; }
+        .proceso-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto; }
+        .paso { text-align: center; }
+        .paso-numero { width: 60px; height: 60px; background: rgba(255, 193, 7, 0.2); border: 2px solid #ffc107; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffc107; font-size: 1.8rem; font-weight: 800; margin: 0 auto 20px; }
+        .paso h3 { color: #ffc107; font-size: 1rem; font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
+        .paso p { color: #bbb; font-size: 0.9rem; line-height: 1.6; }
+
+        /* ==================== CTA ==================== */
+        .cta-final { background: linear-gradient(135deg, #ffc107 0%, #ff6b35 100%); padding: 80px 40px; color: white; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .cta-text h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; }
+        .cta-text p { font-size: 1rem; margin-bottom: 20px; color: rgba(255, 255, 255, 0.9); line-height: 1.7; }
+        .cta-text button { background: #0f1419; color: #ffc107; border: none; padding: 14px 30px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 0.3s; margin-top: 20px; display: flex; align-items: center; gap: 10px; }
+        .cta-text button:hover { background: #1a2847; transform: translateY(-3px); }
+
+        /* ==================== FORM ==================== */
+        .form-section { background: #0f1419; padding: 40px; border-radius: 12px; border: 1px solid rgba(255, 193, 7, 0.2); }
+        .form-section h3 { color: white; font-size: 1.4rem; margin-bottom: 30px; font-weight: 700; }
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: bold; }
-        .form-group input, .form-group select { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
-        .form-group input:focus, .form-group select:focus { outline: none; border-color: #2d5a7b; box-shadow: 0 0 0 3px rgba(45,90,123,0.1); }
-        .form-submit { width: 100%; padding: 15px; background: #2d5a7b; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        .success-message { display: none; background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 20px; border-radius: 6px; text-align: center; margin-bottom: 20px; }
-        footer { background: #1a3a52; color: white; padding: 40px; text-align: center; border-top: 3px solid #2d5a7b; }
-        @media (max-width: 768px) { header { flex-direction: column; gap: 20px; } nav { flex-direction: column; gap: 15px; } .hero h1 { font-size: 2rem; } .stats { grid-template-columns: repeat(2, 1fr); } }
+        .form-group label { display: block; color: #bbb; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 15px; background: rgba(255, 193, 7, 0.05); border: 1px solid rgba(255, 193, 7, 0.2); border-radius: 6px; color: white; font-family: 'Segoe UI', sans-serif; font-size: 1rem; transition: all 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #ffc107; background: rgba(255, 193, 7, 0.1); }
+        .form-group select option { background: #1a2233; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .submit-btn { width: 100%; padding: 15px; background: #ffc107; color: #0f1419; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-size: 1rem; margin-top: 20px; }
+        .submit-btn:hover { background: #ffb300; transform: translateY(-2px); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* ==================== FOOTER ==================== */
+        footer { background: #0a0e1a; padding: 50px 40px; border-top: 1px solid rgba(255, 193, 7, 0.2); }
+        .footer-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 60px; color: #bbb; font-size: 0.9rem; }
+        .footer-logo { display: flex; gap: 10px; margin-bottom: 20px; font-weight: 700; color: white; }
+        .footer-links { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .footer-col h4 { color: #ffc107; font-size: 0.9rem; font-weight: 700; margin-bottom: 15px; text-transform: uppercase; }
+        .footer-col a { color: #bbb; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
+        .footer-col a:hover { color: #ffc107; }
+        .footer-socials { display: flex; gap: 20px; }
+        .social-icon { width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 193, 7, 0.1); display: flex; align-items: center; justify-content: center; color: #ffc107; cursor: pointer; transition: all 0.3s; }
+        .social-icon:hover { background: #ffc107; color: #0f1419; }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; }
+            .servicios-grid { grid-template-columns: repeat(2, 1fr); }
+            .proyectos-grid { grid-template-columns: repeat(3, 1fr); }
+            .proceso-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-final { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero-text h1 { font-size: 2.2rem; }
+            .stats-section { grid-template-columns: repeat(2, 1fr); }
+            .form-row { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">🛣️ SEÑALES CR</div>
+        <div class="logo">
+            <div class="logo-icon">🛣️</div>
+            <div>SEÑALES<br>DE COSTA RICA</div>
+        </div>
         <nav>
-            <a href="#inicio">INICIO</a>
+            <a href="#inicio" class="active">INICIO</a>
             <a href="#servicios">SERVICIOS</a>
+            <a href="#proyectos">PROYECTOS</a>
+            <a href="#nosotros">NOSOTROS</a>
             <a href="#contacto">CONTACTO</a>
-            <a href="https://wa.me/506XXXXXXXX" class="btn-whatsapp">📱 ESCRÍBENOS</a>
+            <a href="https://wa.me/50622345678" class="btn-whatsapp">📱 ESCRÍBENOS</a>
         </nav>
     </header>
 
     <section class="hero" id="inicio">
-        <h1>HACEMOS QUE TU CAMINO<br>SEA SEGURO</h1>
-        <p>Soluciones profesionales en señalización vial, rotulación y seguridad</p>
-        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">SOLICITAR COTIZACIÓN</button>
-            <a href="https://wa.me/506XXXXXXXX" class="btn btn-secondary">ESCRIBIR POR WHATSAPP</a>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>DISEÑAMOS • FABRICAMOS • INSTALAMOS</h2>
+                <h1>HACEMOS<br>QUE TU CAMINO<br><span>SEA SEGURO</span></h1>
+                <p>Soluciones profesionales en señalización vial, rotulación y seguridad para empresas, proyectos y espacios comerciales.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" id="btnCotizar">📞 SOLICITAR COTIZACIÓN</button>
+                    <a href="https://wa.me/50622345678" class="btn-secondary">💬 ESCRIBIR POR WHATSAPP</a>
+                </div>
+                <div class="hero-social">
+                    <div class="avatars">
+                        <div class="avatar">👥</div>
+                        <div class="avatar" style="margin-left:-5px">👥</div>
+                        <div class="avatar" style="margin-left:-5px">👥</div>
+                    </div>
+                    <span>+200 proyectos exitosos en todo Costa Rica</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-box">
+                    🛣️
+                    <div class="hero-features">
+                        <div class="feature-item"><div class="feature-icon">⭐</div><div>MATERIALES<br>DE ALTA CALIDAD</div></div>
+                        <div class="feature-item"><div class="feature-icon">🔧</div><div>INSTALACIÓN<br>PROFESIONAL</div></div>
+                        <div class="feature-item"><div class="feature-icon">✅</div><div>CUMPLIMIENTO<br>DE NORMATIVAS</div></div>
+                        <div class="feature-item"><div class="feature-icon">🎯</div><div>ATENCIÓN<br>PERSONALIZADA</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="servicios" id="servicios">
-        <h2>Nuestros Servicios</h2>
+    <section class="servicios-section" id="servicios">
+        <div class="section-title">
+            <p class="section-label">NUESTROS SERVICIOS</p>
+            <h2>Soluciones a la medida de tu proyecto</h2>
+        </div>
         <div class="servicios-grid">
             <div class="servicio-card">
-                <h3>🛣️ Señalización Vial</h3>
-                <p>Demarcación horizontal y vertical para carreteras y vías públicas.</p>
+                <div class="servicio-icon">🛣️</div>
+                <h3>Señalización Vial</h3>
+                <p>Demarcación horizontal y vertical, señales preventivas, reglamentarias e informativas para todo tipo de vías.</p>
+                <a href="#contacto" class="servicio-link">VER MÁS →</a>
             </div>
             <div class="servicio-card">
-                <h3>🏪 Rotulación Comercial</h3>
-                <p>Rótulos, letras 3D y cajas de luz para tu negocio.</p>
+                <div class="servicio-icon">🏪</div>
+                <h3>Rotulación Comercial</h3>
+                <p>Rótulos, letras 3D, cajas de luz, fachadas y todo tipo de rotulación para tu negocio.</p>
+                <a href="#contacto" class="servicio-link">VER MÁS →</a>
             </div>
             <div class="servicio-card">
-                <h3>⚠️ Señales de Seguridad</h3>
-                <p>Señalización industrial y de evacuación. Cumplimiento normativo.</p>
+                <div class="servicio-icon">⚠️</div>
+                <h3>Señales de Seguridad</h3>
+                <p>Señalización industrial, evacuación, equipos contra incendios y riesgos. Cumplimiento con normativas.</p>
+                <a href="#contacto" class="servicio-link">VER MÁS →</a>
             </div>
             <div class="servicio-card">
-                <h3>🎯 Proyectos Personalizados</h3>
-                <p>Soluciones únicas a medida de tus necesidades.</p>
+                <div class="servicio-icon">🎯</div>
+                <h3>Proyectos Personalizados</h3>
+                <p>Desarrollamos soluciones a la medida de tus necesidades. Asesoría y ejecución completa.</p>
+                <a href="#contacto" class="servicio-link">VER MÁS →</a>
             </div>
         </div>
     </section>
 
-    <section class="stats">
-        <div class="stat-item">
-            <h3>+10</h3>
-            <p>Años de Experiencia</p>
+    <section class="stats-section">
+        <div class="stat-item"><h3>+10</h3><p>Años de Experiencia</p></div>
+        <div class="stat-item"><h3>+200</h3><p>Proyectos Completados</p></div>
+        <div class="stat-item"><h3>+150</h3><p>Clientes Satisfechos</p></div>
+        <div class="stat-item"><h3>TODO</h3><p>Costa Rica</p></div>
+    </section>
+
+    <section class="proyectos-section" id="proyectos">
+        <div class="proyectos-header">
+            <h2>PROYECTOS DESTACADOS</h2>
+            <a href="#contacto" class="ver-todos">VER TODOS LOS PROYECTOS →</a>
         </div>
-        <div class="stat-item">
-            <h3>+200</h3>
-            <p>Proyectos Completados</p>
-        </div>
-        <div class="stat-item">
-            <h3>+150</h3>
-            <p>Clientes Satisfechos</p>
-        </div>
-        <div class="stat-item">
-            <h3>TODO</h3>
-            <p>Costa Rica</p>
+        <div class="proyectos-grid">
+            <div class="proyecto-card"></div>
+            <div class="proyecto-card"></div>
+            <div class="proyecto-card"></div>
+            <div class="proyecto-card"></div>
+            <div class="proyecto-card"></div>
         </div>
     </section>
 
-    <section class="formulario-section" id="contacto">
-        <h2>Solicita tu Cotización</h2>
-        <div class="success-message" id="successMessage">
-            ✓ ¡Gracias! Te contactamos en máximo 2 horas.
+    <section class="proceso-section">
+        <h2>NUESTRO PROCESO</h2>
+        <div class="proceso-grid">
+            <div class="paso"><div class="paso-numero">01</div><h3>NOS CONTACTAS</h3><p>Guardamos tu solicitud por WhatsApp, llamada o formulario.</p></div>
+            <div class="paso"><div class="paso-numero">02</div><h3>ANALIZAMOS</h3><p>Evaluamos tu proyecto y te brindamos la mejor solución.</p></div>
+            <div class="paso"><div class="paso-numero">03</div><h3>ENVIAMOS COTIZACIÓN</h3><p>Te enviamos propuesta clara, detallada y competitiva.</p></div>
+            <div class="paso"><div class="paso-numero">04</div><h3>EJECUTAMOS</h3><p>Fabricamos e instalamos con calidad y en el tiempo acordado.</p></div>
         </div>
-        <form id="leadForm">
-            <div class="form-group">
-                <label for="nombre">Nombre Completo *</label>
-                <input type="text" id="nombre" name="nombre" required>
+    </section>
+
+    <section class="cta-final" id="contacto">
+        <div class="cta-text">
+            <h2>¿LISTO PARA TU PROYECTO?</h2>
+            <p>Solicita tu cotización hoy mismo y recibe atención personalizada. Tus datos están protegidos con nosotros.</p>
+            <button onclick="window.open('https://wa.me/50622345678','_blank')">💬 ESCRIBIR POR WHATSAPP</button>
+        </div>
+
+        <div class="form-section">
+            <h3>SOLICITA TU COTIZACIÓN</h3>
+            <div id="formSuccess" style="display:none; text-align:center; padding:40px 0;">
+                <div style="font-size:3rem; margin-bottom:16px;">✓</div>
+                <h3 id="formSuccessName" style="color:#ffc107; margin-bottom:8px;"></h3>
+                <p style="color:#bbb;">Te contactamos en máximo 2 horas.</p>
             </div>
-            <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono *</label>
-                <input type="tel" id="telefono" name="telefono" placeholder="+506 8765 4321" required>
-            </div>
-            <div class="form-group">
-                <label for="servicio">Tipo de Servicio *</label>
-                <select id="servicio" name="tipoServicio" required>
-                    <option value="">-- Selecciona un servicio --</option>
-                    <option value="vial">Señalización Vial</option>
-                    <option value="rotulacion">Rotulación Comercial</option>
-                    <option value="seguridad">Señales de Seguridad</option>
-                    <option value="personalizado">Proyecto Personalizado</option>
-                </select>
-            </div>
-            <button type="submit" class="form-submit">✉️ ENVIAR SOLICITUD</button>
-        </form>
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre completo *</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono *</label>
+                        <input type="tel" id="telefono" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Empresa (opcional)</label>
+                        <input type="text" id="empresa">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tipo de servicio *</label>
+                    <select id="tipoServicio" required>
+                        <option value="">-- Selecciona --</option>
+                        <option value="vial">Señalización Vial</option>
+                        <option value="rotulacion">Rotulación Comercial</option>
+                        <option value="seguridad">Señales de Seguridad</option>
+                        <option value="personalizado">Proyecto Personalizado</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ubicación del proyecto</label>
+                    <input type="text" id="ubicacion" placeholder="Ciudad o zona">
+                </div>
+                <div class="form-group">
+                    <label>Cuéntanos más sobre tu proyecto</label>
+                    <textarea id="descripcion" rows="4" placeholder="Descripción de lo que necesitas..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">✉️ ENVIAR SOLICITUD</button>
+                <p style="text-align:center; color:#bbb; font-size:0.85rem; margin-top:15px;">Tu información está protegida. No compartimos tus datos.</p>
+            </form>
+        </div>
     </section>
 
     <footer>
-        <p><strong>Señales de Costa Rica</strong></p>
-        <p>📞 +506 2234 5678 | 📧 hola@senalesdecostarica.com</p>
-        <p style="margin-top: 20px; color: #999; font-size: 0.9rem;">© 2024 Señales CR. Todos los derechos reservados.</p>
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo">
+                    <div style="background:#ffc107;width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#0f1419;font-weight:700;">🛣️</div>
+                    <div>SEÑALES<br>DE COSTA RICA</div>
+                </div>
+                <p>Señalización profesional que vende.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>CONTACTO</h4>
+                    <a href="tel:+50622345678">📞 +506 2234 5678</a>
+                    <a href="mailto:hola@senalesdecostarica.com">📧 hola@senalesdecostarica.com</a>
+                    <a href="#">📍 Alajuela, Costa Rica</a>
+                </div>
+                <div class="footer-col">
+                    <h4>ENLACES</h4>
+                    <a href="#inicio">Inicio</a>
+                    <a href="#servicios">Servicios</a>
+                    <a href="#proyectos">Proyectos</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="footer-col">
+                    <h4>SÍGUENOS</h4>
+                    <div class="footer-socials">
+                        <div class="social-icon">f</div>
+                        <div class="social-icon">📷</div>
+                        <div class="social-icon">💬</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="text-align:center; color:#666; margin-top:50px; padding-top:30px; border-top:1px solid rgba(255,193,7,0.2);">© 2024 Señales de Costa Rica. Todos los derechos reservados.</p>
     </footer>
 
     <script>
-        document.getElementById('leadForm').addEventListener('submit', async (e) => {
+        document.getElementById('btnCotizar').addEventListener('click', () =>
+            document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' }));
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = e.target.querySelector('button[type="submit"]');
+            const nombre = document.getElementById('nombre').value;
+            const btn = document.getElementById('submitBtn');
             btn.disabled = true;
             btn.textContent = '⏳ Enviando...';
+
             try {
-                const data = {
-                    nombre: document.getElementById('nombre').value,
-                    email: document.getElementById('email').value,
-                    telefono: document.getElementById('telefono').value,
-                    tipoServicio: document.getElementById('servicio').value
-                };
-                const response = await fetch('/api/leads', {
+                const r = await fetch('/api/leads', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify({
+                        nombre,
+                        email:        document.getElementById('email').value,
+                        telefono:     document.getElementById('telefono').value,
+                        tipoServicio: document.getElementById('tipoServicio').value
+                    })
                 });
-                const result = await response.json();
+                const result = await r.json();
                 if (result.success) {
-                    document.getElementById('successMessage').style.display = 'block';
-                    document.getElementById('leadForm').style.display = 'none';
+                    document.getElementById('contactForm').style.display = 'none';
+                    document.getElementById('formSuccessName').textContent = `¡Gracias ${nombre}!`;
+                    document.getElementById('formSuccess').style.display = 'block';
                 } else {
                     alert('Error: ' + (result.error || 'Error al enviar'));
                     btn.disabled = false;
                     btn.textContent = '✉️ ENVIAR SOLICITUD';
                 }
-            } catch (error) {
-                alert('Error al enviar');
+            } catch {
+                alert('Error de conexión. Intenta de nuevo.');
                 btn.disabled = false;
                 btn.textContent = '✉️ ENVIAR SOLICITUD';
             }

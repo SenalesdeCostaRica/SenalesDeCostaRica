@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Señales CR</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',sans-serif; background:#0f1419; color:white; min-height:100vh; }
+
+/* ---- LOGIN ---- */
+#loginScreen {
+  display:none; align-items:center; justify-content:center; min-height:100vh;
+}
+.login-box {
+  background:#1a2233; border:1px solid rgba(255,193,7,0.3);
+  border-radius:12px; padding:40px; width:360px; max-width:90vw;
+}
+.login-logo { color:#ffc107; font-size:1.1rem; font-weight:800; margin-bottom:6px; }
+.login-sub  { color:#888; font-size:0.83rem; margin-bottom:24px; }
+.login-input {
+  width:100%; padding:12px 14px; background:rgba(255,193,7,0.05);
+  border:1px solid rgba(255,193,7,0.2); border-radius:6px;
+  color:white; font-size:1rem; margin-bottom:12px; outline:none;
+}
+.login-input:focus { border-color:#ffc107; }
+.login-btn {
+  width:100%; padding:13px; background:#ffc107; color:#0f1419;
+  border:none; border-radius:6px; font-weight:700; font-size:1rem; cursor:pointer;
+}
+.login-btn:hover { background:#ffb300; }
+.login-btn:disabled { opacity:0.6; cursor:not-allowed; }
+.error-msg { color:#f87171; font-size:0.83rem; margin-bottom:12px; display:none; }
+
+/* ---- DASHBOARD ---- */
+#dashScreen { display:none; }
+.dash-header {
+  background:#0a0e1a; padding:14px 24px;
+  display:flex; justify-content:space-between; align-items:center;
+  border-bottom:1px solid rgba(255,193,7,0.15);
+  position:sticky; top:0; z-index:10;
+}
+.dash-logo { color:#ffc107; font-weight:800; font-size:0.95rem; }
+.logout-btn {
+  background:transparent; border:1px solid rgba(255,193,7,0.3);
+  color:#888; padding:6px 14px; border-radius:6px; cursor:pointer;
+  font-size:0.8rem; transition:all 0.2s;
+}
+.logout-btn:hover { color:#ffc107; border-color:#ffc107; }
+
+/* ---- TABS ---- */
+.tabs { display:flex; background:#0a0e1a; border-bottom:1px solid rgba(255,193,7,0.15); }
+.tab-btn {
+  padding:13px 24px; background:transparent; border:none;
+  border-bottom:2px solid transparent; color:#888; font-weight:600;
+  font-size:0.85rem; cursor:pointer; transition:all 0.2s;
+}
+.tab-btn.active { color:#ffc107; border-bottom-color:#ffc107; }
+.tab-btn:hover  { color:#fff; }
+.tab-panel { padding:24px; }
+.loading { color:#888; padding:40px; text-align:center; font-size:0.9rem; }
+
+/* ---- CRM ---- */
+.stats-bar { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+.stat { background:#1a2233; border:1px solid rgba(255,193,7,0.1); border-radius:8px; padding:16px; text-align:center; }
+.stat-num        { display:block; font-size:1.8rem; font-weight:800; color:#ffc107; }
+.stat-num.blue   { color:#60a5fa; }
+.stat-num.purple { color:#a78bfa; }
+.stat-num.green  { color:#4ade80; }
+.stat-lbl { display:block; font-size:0.7rem; color:#888; text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+.table-wrap { overflow-x:auto; border-radius:8px; border:1px solid rgba(255,193,7,0.1); }
+.crm-table { width:100%; border-collapse:collapse; }
+.crm-table th { background:#0a0e1a; color:#888; font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; padding:10px 14px; text-align:left; border-bottom:1px solid rgba(255,193,7,0.1); }
+.crm-table td { padding:11px 14px; font-size:0.84rem; color:#ccc; border-bottom:1px solid rgba(255,255,255,0.04); }
+.crm-table tr:last-child td { border-bottom:none; }
+.crm-table tr:hover td { background:rgba(255,193,7,0.02); }
+.status-select { padding:4px 10px; border-radius:20px; border:none; font-size:0.75rem; font-weight:700; cursor:pointer; outline:none; }
+.badge-new       { background:rgba(96,165,250,0.15);  color:#60a5fa; }
+.badge-contacted { background:rgba(251,191,36,0.15);  color:#fbbf24; }
+.badge-quoted    { background:rgba(167,139,250,0.15); color:#a78bfa; }
+.badge-closed    { background:rgba(74,222,128,0.15);  color:#4ade80; }
+
+/* ---- WHATSAPP ---- */
+.conv-layout { display:grid; grid-template-columns:260px 1fr; height:calc(100vh - 160px); border:1px solid rgba(255,193,7,0.1); border-radius:8px; overflow:hidden; }
+.conv-list { background:#0a0e1a; overflow-y:auto; border-right:1px solid rgba(255,193,7,0.1); }
+.conv-item { padding:14px; cursor:pointer; display:flex; align-items:center; gap:10px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.conv-item.active { background:rgba(255,193,7,0.07); }
+.conv-item:hover  { background:rgba(255,193,7,0.04); }
+.conv-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#ffc107,#ff6b35); display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; color:#0f1419; flex-shrink:0; }
+.conv-name    { font-size:0.84rem; font-weight:600; color:white; }
+.conv-preview { font-size:0.74rem; color:#666; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:160px; }
+.conv-chat    { display:flex; flex-direction:column; background:#111827; }
+.conv-header  { background:#0a0e1a; padding:14px 18px; border-bottom:1px solid rgba(255,193,7,0.1); }
+.conv-sub     { font-size:0.78rem; color:#888; }
+.conv-messages { flex:1; padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; }
+.bubble { max-width:65%; padding:10px 14px; border-radius:12px; font-size:0.84rem; line-height:1.5; }
+.bubble-out { background:rgba(255,193,7,0.1); color:#ffe08a; align-self:flex-end; border-bottom-right-radius:3px; }
+.bubble-time { display:block; font-size:0.7rem; color:#888; margin-top:4px; text-align:right; }
+.conv-input-row { display:flex; gap:8px; padding:12px 16px; background:#0a0e1a; border-top:1px solid rgba(255,193,7,0.1); }
+.conv-input { flex:1; padding:9px 12px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:6px; color:#555; font-size:0.84rem; cursor:not-allowed; }
+.conv-send  { padding:9px 16px; background:rgba(255,193,7,0.08); color:#666; border:none; border-radius:6px; font-weight:700; font-size:0.82rem; cursor:not-allowed; }
+
+/* ---- EMAIL ---- */
+.email-layout { display:grid; grid-template-columns:320px 1fr; height:calc(100vh - 160px); border:1px solid rgba(255,193,7,0.1); border-radius:8px; overflow:hidden; }
+.email-list-panel { background:#0a0e1a; overflow-y:auto; border-right:1px solid rgba(255,193,7,0.1); }
+.email-item { padding:14px 16px; cursor:pointer; border-bottom:1px solid rgba(255,255,255,0.04); }
+.email-item.active { background:rgba(255,193,7,0.07); }
+.email-item:hover  { background:rgba(255,193,7,0.04); }
+.email-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+.email-to   { font-size:0.83rem; font-weight:600; color:white; }
+.email-time { font-size:0.72rem; color:#555; }
+.email-subj { font-size:0.78rem; color:#888; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.email-detail { background:#111827; padding:24px; overflow-y:auto; }
+.email-detail-header { border-bottom:1px solid rgba(255,193,7,0.1); padding-bottom:16px; margin-bottom:20px; }
+.email-detail-to   { color:#bbb; font-size:0.84rem; margin-bottom:4px; }
+.email-detail-subj { color:white; font-size:1rem; font-weight:700; margin-bottom:4px; }
+.email-detail-date { color:#555; font-size:0.78rem; }
+.email-detail-body { color:#ccc; font-size:0.88rem; line-height:1.7; }
+.email-detail-body h2 { color:white; margin-bottom:12px; }
+.email-detail-body p  { margin-bottom:10px; }
+.email-detail-body hr { border-color:rgba(255,255,255,0.1); margin:16px 0; }
+
+@media (max-width:768px) {
+  .stats-bar { grid-template-columns:repeat(2,1fr); }
+  .conv-layout  { grid-template-columns:1fr; height:auto; }
+  .email-layout { grid-template-columns:1fr; height:auto; }
+  .conv-list, .email-list-panel { height:200px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">🛣️ SEÑALES CR</div>
+    <p class="login-sub">Panel de administración</p>
+    <div id="loginError" class="error-msg"></div>
+    <input type="password" id="pwInput" class="login-input" placeholder="Contraseña">
+    <button id="loginBtn" class="login-btn">ENTRAR →</button>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashScreen">
+  <div class="dash-header">
+    <div class="dash-logo">🛣️ SEÑALES CR — Admin</div>
+    <button id="logoutBtn" class="logout-btn">Cerrar sesión</button>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="crm">👥 CRM</button>
+    <button class="tab-btn" data-tab="whatsapp">💬 WhatsApp</button>
+    <button class="tab-btn" data-tab="email">📧 Email</button>
+  </div>
+  <div id="panel-crm"      class="tab-panel"><p class="loading">Cargando...</p></div>
+  <div id="panel-whatsapp" class="tab-panel" style="display:none"><p class="loading">Cargando...</p></div>
+  <div id="panel-email"    class="tab-panel" style="display:none"><p class="loading">Cargando...</p></div>
+</div>
+
+<script>
+const TOKEN_KEY = 'senales_admin_token';
+let allLeads = [];
+let selectedLeadId = null;
+let emailMessages = [];
+
+// ---- AUTH ----
+function getToken() { return localStorage.getItem(TOKEN_KEY); }
+
+async function login() {
+  const btn = document.getElementById('loginBtn');
+  const err = document.getElementById('loginError');
+  err.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Verificando...';
+  try {
+    const r = await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: document.getElementById('pwInput').value })
+    });
+    if (!r.ok) {
+      err.textContent = 'Contraseña incorrecta';
+      err.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'ENTRAR →';
+      return;
+    }
+    const { token } = await r.json();
+    localStorage.setItem(TOKEN_KEY, token);
+    showDashboard();
+  } catch {
+    err.textContent = 'Error de conexión';
+    err.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'ENTRAR →';
+  }
+}
+
+function logout() {
+  localStorage.removeItem(TOKEN_KEY);
+  location.reload();
+}
+
+function checkAuth() {
+  if (getToken()) {
+    showDashboard();
+  } else {
+    document.getElementById('loginScreen').style.display = 'flex';
+  }
+}
+
+// ---- API HELPER ----
+async function apiFetch(url, options = {}) {
+  const { body, ...rest } = options;
+  return fetch(url, {
+    ...rest,
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
+    ...(body !== undefined ? { body: JSON.stringify(body) } : {})
+  });
+}
+
+// ---- DASHBOARD ----
+function showDashboard() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashScreen').style.display  = 'block';
+  loadCRM();
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'none');
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById(`panel-${tab}`).style.display = 'block';
+  if (tab === 'crm')      loadCRM();
+  if (tab === 'whatsapp') loadWhatsApp();
+  if (tab === 'email')    loadEmail();
+}
+
+// ---- CRM ----
+async function loadCRM() {
+  document.getElementById('panel-crm').innerHTML = '<p class="loading">Cargando leads...</p>';
+  const r = await apiFetch('/api/crm');
+  if (r.status === 401) { logout(); return; }
+  const { leads } = await r.json();
+  allLeads = leads;
+  renderCRM();
+}
+
+function renderCRM() {
+  const counts = { new:0, contacted:0, quoted:0, closed:0 };
+  allLeads.forEach(l => { if (counts[l.status] !== undefined) counts[l.status]++; });
+
+  const rows = allLeads.length > 0
+    ? allLeads.map(l => `
+        <tr>
+          <td>${escHtml(l.nombre)}</td>
+          <td>${escHtml(l.email)}</td>
+          <td>${escHtml(l.telefono)}</td>
+          <td>${escHtml(l.tipoServicio || '—')}</td>
+          <td>
+            <select class="status-select badge-${l.status}"
+              onchange="updateStatus('${l._id}', this.value, this)">
+              <option value="new"       ${l.status==='new'       ?'selected':''}>Nuevo</option>
+              <option value="contacted" ${l.status==='contacted' ?'selected':''}>Contactado</option>
+              <option value="quoted"    ${l.status==='quoted'    ?'selected':''}>Cotizado</option>
+              <option value="closed"    ${l.status==='closed'    ?'selected':''}>Cerrado ✓</option>
+            </select>
+          </td>
+          <td>${new Date(l.createdAt).toLocaleDateString('es-CR')}</td>
+        </tr>`).join('')
+    : '<tr><td colspan="6" style="text-align:center;color:#666;padding:30px">Sin leads aún</td></tr>';
+
+  document.getElementById('panel-crm').innerHTML = `
+    <div class="stats-bar">
+      <div class="stat"><span class="stat-num">${allLeads.length}</span><span class="stat-lbl">Total</span></div>
+      <div class="stat"><span class="stat-num blue">${counts.new}</span><span class="stat-lbl">Nuevos</span></div>
+      <div class="stat"><span class="stat-num purple">${counts.quoted}</span><span class="stat-lbl">Cotizados</span></div>
+      <div class="stat"><span class="stat-num green">${counts.closed}</span><span class="stat-lbl">Cerrados</span></div>
+    </div>
+    <div class="table-wrap">
+      <table class="crm-table">
+        <thead><tr>
+          <th>Nombre</th><th>Email</th><th>Teléfono</th>
+          <th>Servicio</th><th>Estado</th><th>Fecha</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+async function updateStatus(leadId, status, selectEl) {
+  const r = await apiFetch(`/api/crm?id=${leadId}`, { method: 'PUT', body: { status } });
+  if (r.ok) {
+    const lead = allLeads.find(l => l._id === leadId);
+    if (lead) lead.status = status;
+    selectEl.className = `status-select badge-${status}`;
+  }
+}
+
+// ---- WHATSAPP ----
+async function loadWhatsApp() {
+  document.getElementById('panel-whatsapp').innerHTML = '<p class="loading">Cargando mensajes...</p>';
+  const r = await apiFetch('/api/messages?type=whatsapp');
+  if (r.status === 401) { logout(); return; }
+  const { messages } = await r.json();
+  renderWhatsAppPanel(messages);
+}
+
+function renderWhatsAppPanel(messages) {
+  if (!messages.length) {
+    document.getElementById('panel-whatsapp').innerHTML =
+      '<p class="loading">Sin mensajes de WhatsApp enviados aún.</p>';
+    return;
+  }
+
+  const byLead = {};
+  messages.forEach(m => {
+    const id = String(m.leadId);
+    if (!byLead[id]) byLead[id] = { name: m.leadName, email: m.leadEmail, msgs: [] };
+    byLead[id].msgs.push(m);
+  });
+
+  const leadIds = Object.keys(byLead);
+  if (!selectedLeadId || !byLead[selectedLeadId]) selectedLeadId = leadIds[0];
+
+  const listItems = leadIds.map(id => `
+    <div class="conv-item ${id === selectedLeadId ? 'active' : ''}"
+      onclick="selectWaLead('${id}')">
+      <div class="conv-avatar">${byLead[id].name.slice(0,2).toUpperCase()}</div>
+      <div style="min-width:0">
+        <div class="conv-name">${escHtml(byLead[id].name)}</div>
+        <div class="conv-preview">${escHtml((byLead[id].msgs[byLead[id].msgs.length-1]?.content || '').slice(0,40))}</div>
+      </div>
+    </div>`).join('');
+
+  const selected = byLead[selectedLeadId];
+  const bubbles = [...selected.msgs].reverse().map(m => `
+    <div class="bubble bubble-out">
+      ${escHtml(m.content).replace(/\n/g,'<br>')}
+      <span class="bubble-time">${new Date(m.createdAt).toLocaleString('es-CR')}</span>
+    </div>`).join('');
+
+  document.getElementById('panel-whatsapp').innerHTML = `
+    <div class="conv-layout">
+      <div class="conv-list">${listItems}</div>
+      <div class="conv-chat">
+        <div class="conv-header">
+          <div class="conv-name">${escHtml(selected.name)}</div>
+          <div class="conv-sub">${escHtml(selected.email)}</div>
+        </div>
+        <div class="conv-messages">${bubbles}</div>
+        <div class="conv-input-row">
+          <input class="conv-input" disabled
+            placeholder="Disponible cuando se apruebe WhatsApp Business"
+            title="Disponible cuando se apruebe WhatsApp Business">
+          <button class="conv-send" disabled>ENVIAR</button>
+        </div>
+      </div>
+    </div>`;
+
+  window._waByLead = byLead;
+}
+
+function selectWaLead(leadId) {
+  selectedLeadId = leadId;
+  if (window._waByLead) {
+    const allMsgs = Object.values(window._waByLead).flatMap(l => l.msgs);
+    renderWhatsAppPanel(allMsgs);
+  }
+}
+
+// ---- EMAIL ----
+async function loadEmail() {
+  document.getElementById('panel-email').innerHTML = '<p class="loading">Cargando emails...</p>';
+  const r = await apiFetch('/api/messages?type=email');
+  if (r.status === 401) { logout(); return; }
+  const { messages } = await r.json();
+  emailMessages = messages;
+  renderEmailPanel();
+}
+
+function renderEmailPanel() {
+  if (!emailMessages.length) {
+    document.getElementById('panel-email').innerHTML =
+      '<p class="loading">Sin emails enviados aún.</p>';
+    return;
+  }
+
+  const items = emailMessages.map((m, i) => `
+    <div class="email-item ${i===0?'active':''}" onclick="showEmail(this,${i})">
+      <div class="email-meta">
+        <span class="email-to">→ ${escHtml(m.leadName)}</span>
+        <span class="email-time">${new Date(m.createdAt).toLocaleDateString('es-CR')}</span>
+      </div>
+      <div class="email-subj">${escHtml(m.subject || '(sin asunto)')}</div>
+    </div>`).join('');
+
+  document.getElementById('panel-email').innerHTML = `
+    <div class="email-layout">
+      <div class="email-list-panel">${items}</div>
+      <div class="email-detail" id="emailDetail">${buildEmailDetail(emailMessages[0])}</div>
+    </div>`;
+}
+
+function buildEmailDetail(m) {
+  return `
+    <div class="email-detail-header">
+      <div class="email-detail-to">Para: ${escHtml(m.leadName)} &lt;${escHtml(m.leadEmail)}&gt;</div>
+      <div class="email-detail-subj">${escHtml(m.subject || '(sin asunto)')}</div>
+      <div class="email-detail-date">${new Date(m.createdAt).toLocaleString('es-CR')}</div>
+    </div>
+    <div class="email-detail-body">${m.content}</div>`;
+}
+
+function showEmail(el, index) {
+  document.querySelectorAll('.email-item').forEach(e => e.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('emailDetail').innerHTML = buildEmailDetail(emailMessages[index]);
+}
+
+// ---- UTILS ----
+function escHtml(str) {
+  return String(str || '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ---- INIT ----
+document.addEventListener('DOMContentLoaded', () => {
+  checkAuth();
+  document.getElementById('loginBtn').addEventListener('click', login);
+  document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key==='Enter') login(); });
+  document.getElementById('logoutBtn').addEventListener('click', logout);
+  document.querySelectorAll('.tab-btn').forEach(b =>
+    b.addEventListener('click', () => switchTab(b.dataset.tab))
+  );
+});
+</script>
+</body>
+</html>
