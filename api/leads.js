@@ -88,8 +88,10 @@ module.exports = async function handler(req, res) {
     await newLead.save();
     console.log(`✓ Lead creado: ${nombre}`);
 
-    sendWelcomeEmail(nombre, email).catch(err => console.error(err));
-    sendWhatsApp(telefono, `Hola ${nombre} 👋\n\nRecibimos tu solicitud.\nTe contactamos en máximo 2 horas. ✓`).catch(err => console.error(err));
+    await Promise.all([
+      sendWelcomeEmail(nombre, email).catch(err => console.error('Email error:', err)),
+      sendWhatsApp(telefono, `Hola ${nombre} 👋\n\nRecibimos tu solicitud.\nTe contactamos en máximo 2 horas. ✓`).catch(err => console.error('WhatsApp error:', err))
+    ]);
 
     return res.status(200).json({
       success: true,
