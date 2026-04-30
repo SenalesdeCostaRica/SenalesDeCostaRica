@@ -2,6 +2,9 @@
   "name": "senales-cr-sistema",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "vercel dev",
     "build": "echo 'No build needed'"
