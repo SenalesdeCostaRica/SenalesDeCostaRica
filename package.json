@@ -1,0 +1,15 @@
+{
+  "name": "senales-cr-sistema",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build needed'"
+  },
+  "dependencies": {
+    "mongoose": "^7.0.0",
+    "@sendgrid/mail": "^7.7.0",
+    "twilio": "^3.86.0",
+    "dotenv": "^16.0.3"
+  }
+}

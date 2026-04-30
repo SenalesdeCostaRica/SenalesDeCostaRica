@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Señalización Profesional | Señales CR</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f9f9f9; }
+        header { background: #1a3a52; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: bold; font-size: 1.2rem; }
+        nav { display: flex; gap: 30px; align-items: center; }
+        nav a { color: white; text-decoration: none; transition: color 0.3s; }
+        nav a:hover { color: #2d5a7b; }
+        .btn-whatsapp { background: #25D366; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+        .hero { background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%); color: white; padding: 80px 40px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; margin-bottom: 40px; color: #ddd; }
+        .btn { padding: 15px 40px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; transition: all 0.3s; }
+        .btn-primary { background: #2d5a7b; color: white; }
+        .btn-primary:hover { background: #1a3a52; }
+        .btn-secondary { background: transparent; color: white; border: 2px solid white; }
+        .btn-secondary:hover { border-color: #2d5a7b; color: #2d5a7b; }
+        .servicios { padding: 80px 40px; max-width: 1200px; margin: 0 auto; }
+        .servicios h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; color: #1a3a52; }
+        .servicios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .servicio-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-top: 3px solid #2d5a7b; }
+        .servicio-card:hover { transform: translateY(-5px); }
+        .stats { background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%); color: white; padding: 60px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; max-width: 1200px; margin: 60px auto; border-radius: 12px; }
+        .stat-item h3 { font-size: 2.5rem; color: #2d5a7b; margin-bottom: 10px; }
+        .formulario-section { padding: 80px 40px; max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #333; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: #2d5a7b; box-shadow: 0 0 0 3px rgba(45,90,123,0.1); }
+        .form-submit { width: 100%; padding: 15px; background: #2d5a7b; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        .success-message { display: none; background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 20px; border-radius: 6px; text-align: center; margin-bottom: 20px; }
+        footer { background: #1a3a52; color: white; padding: 40px; text-align: center; border-top: 3px solid #2d5a7b; }
+        @media (max-width: 768px) { header { flex-direction: column; gap: 20px; } nav { flex-direction: column; gap: 15px; } .hero h1 { font-size: 2rem; } .stats { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">🛣️ SEÑALES CR</div>
+        <nav>
+            <a href="#inicio">INICIO</a>
+            <a href="#servicios">SERVICIOS</a>
+            <a href="#contacto">CONTACTO</a>
+            <a href="https://wa.me/506XXXXXXXX" class="btn-whatsapp">📱 ESCRÍBENOS</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h1>HACEMOS QUE TU CAMINO<br>SEA SEGURO</h1>
+        <p>Soluciones profesionales en señalización vial, rotulación y seguridad</p>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-primary" onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})">SOLICITAR COTIZACIÓN</button>
+            <a href="https://wa.me/506XXXXXXXX" class="btn btn-secondary">ESCRIBIR POR WHATSAPP</a>
+        </div>
+    </section>
+
+    <section class="servicios" id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="servicios-grid">
+            <div class="servicio-card">
+                <h3>🛣️ Señalización Vial</h3>
+                <p>Demarcación horizontal y vertical para carreteras y vías públicas.</p>
+            </div>
+            <div class="servicio-card">
+                <h3>🏪 Rotulación Comercial</h3>
+                <p>Rótulos, letras 3D y cajas de luz para tu negocio.</p>
+            </div>
+            <div class="servicio-card">
+                <h3>⚠️ Señales de Seguridad</h3>
+                <p>Señalización industrial y de evacuación. Cumplimiento normativo.</p>
+            </div>
+            <div class="servicio-card">
+                <h3>🎯 Proyectos Personalizados</h3>
+                <p>Soluciones únicas a medida de tus necesidades.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-item">
+            <h3>+10</h3>
+            <p>Años de Experiencia</p>
+        </div>
+        <div class="stat-item">
+            <h3>+200</h3>
+            <p>Proyectos Completados</p>
+        </div>
+        <div class="stat-item">
+            <h3>+150</h3>
+            <p>Clientes Satisfechos</p>
+        </div>
+        <div class="stat-item">
+            <h3>TODO</h3>
+            <p>Costa Rica</p>
+        </div>
+    </section>
+
+    <section class="formulario-section" id="contacto">
+        <h2>Solicita tu Cotización</h2>
+        <div class="success-message" id="successMessage">
+            ✓ ¡Gracias! Te contactamos en máximo 2 horas.
+        </div>
+        <form id="leadForm">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo *</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono *</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="+506 8765 4321" required>
+            </div>
+            <div class="form-group">
+                <label for="servicio">Tipo de Servicio *</label>
+                <select id="servicio" name="tipoServicio" required>
+                    <option value="">-- Selecciona un servicio --</option>
+                    <option value="vial">Señalización Vial</option>
+                    <option value="rotulacion">Rotulación Comercial</option>
+                    <option value="seguridad">Señales de Seguridad</option>
+                    <option value="personalizado">Proyecto Personalizado</option>
+                </select>
+            </div>
+            <button type="submit" class="form-submit">✉️ ENVIAR SOLICITUD</button>
+        </form>
+    </section>
+
+    <footer>
+        <p><strong>Señales de Costa Rica</strong></p>
+        <p>📞 +506 2234 5678 | 📧 hola@senalesdecostarica.com</p>
+        <p style="margin-top: 20px; color: #999; font-size: 0.9rem;">© 2024 Señales CR. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('leadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.textContent = '⏳ Enviando...';
+            try {
+                const data = {
+                    nombre: document.getElementById('nombre').value,
+                    email: document.getElementById('email').value,
+                    telefono: document.getElementById('telefono').value,
+                    tipoServicio: document.getElementById('servicio').value
+                };
+                const response = await fetch('/api/leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('leadForm').style.display = 'none';
+                } else {
+                    alert('Error: ' + (result.error || 'Error al enviar'));
+                    btn.disabled = false;
+                    btn.textContent = '✉️ ENVIAR SOLICITUD';
+                }
+            } catch (error) {
+                alert('Error al enviar');
+                btn.disabled = false;
+                btn.textContent = '✉️ ENVIAR SOLICITUD';
+            }
+        });
+    </script>
+</body>
+</html>
