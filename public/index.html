@@ -36,8 +36,9 @@
         .avatars { display: flex; align-items: center; }
         .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ffc107, #ff6b35); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.7rem; margin-right: -10px; border: 2px solid #0f1419; }
         .hero-image { position: relative; height: 500px; }
-        .hero-image-box { background: linear-gradient(135deg, #1a2847 0%, #0f1419 100%); border-radius: 12px; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 8rem; color: rgba(255, 193, 7, 0.1); overflow: hidden; position: relative; }
-        .hero-image-box::before { content: ''; position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(255, 193, 7, 0.05) 0%, transparent 70%); }
+        .hero-image-box { border-radius: 12px; height: 100%; overflow: hidden; position: relative; }
+        .hero-image-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hero-image-box::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(15,20,25,0.3) 0%, transparent 60%); z-index: 1; }
         .hero-features { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: rgba(255, 193, 7, 0.05); border: 1px solid rgba(255, 193, 7, 0.2); padding: 25px; border-radius: 12px; backdrop-filter: blur(10px); }
         .feature-item { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; color: white; font-size: 0.9rem; }
         .feature-item:last-child { margin-bottom: 0; }
@@ -70,9 +71,11 @@
         .ver-todos { color: #ffc107; text-decoration: none; font-weight: 700; transition: color 0.3s; }
         .ver-todos:hover { color: #ffb300; }
         .proyectos-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
-        .proyecto-card { background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%); border-radius: 12px; height: 250px; overflow: hidden; cursor: pointer; transition: all 0.3s; position: relative; }
+        .proyecto-card { border-radius: 12px; height: 250px; overflow: hidden; cursor: pointer; transition: all 0.3s; position: relative; }
+        .proyecto-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
         .proyecto-card:hover { transform: translateY(-10px); }
-        .proyecto-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%); }
+        .proyecto-card:hover img { transform: scale(1.05); }
+        .proyecto-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,20,25,0.6) 0%, transparent 60%); }
 
         /* ==================== PROCESO ==================== */
         .proceso-section { background: linear-gradient(135deg, #1a2847 0%, #0f1419 100%); padding: 80px 40px; }
@@ -169,8 +172,8 @@
             </div>
             <div class="hero-image">
                 <div class="hero-image-box">
-                    🛣️
-                    <div class="hero-features">
+                    <img src="/hero-bg.jpg" alt="Proyecto señalización vial">
+                    <div class="hero-features" style="z-index:2">
                         <div class="feature-item"><div class="feature-icon">⭐</div><div>MATERIALES<br>DE ALTA CALIDAD</div></div>
                         <div class="feature-item"><div class="feature-icon">🔧</div><div>INSTALACIÓN<br>PROFESIONAL</div></div>
                         <div class="feature-item"><div class="feature-icon">✅</div><div>CUMPLIMIENTO<br>DE NORMATIVAS</div></div>
@@ -227,11 +230,11 @@
             <a href="#contacto" class="ver-todos">VER TODOS LOS PROYECTOS →</a>
         </div>
         <div class="proyectos-grid">
-            <div class="proyecto-card"></div>
-            <div class="proyecto-card"></div>
-            <div class="proyecto-card"></div>
-            <div class="proyecto-card"></div>
-            <div class="proyecto-card"></div>
+            <div class="proyecto-card"><img src="/proyecto1.jpg" alt="Señalización industrial"></div>
+            <div class="proyecto-card"><img src="/proyecto2.jpg" alt="Demarcación parqueo"></div>
+            <div class="proyecto-card"><img src="/proyecto3.jpg" alt="Señalización vial urbana"></div>
+            <div class="proyecto-card"><img src="/proyecto4.jpg" alt="Ciclorruta"></div>
+            <div class="proyecto-card"><img src="/proyecto5.jpg" alt="Pista atlética"></div>
         </div>
     </section>
 
