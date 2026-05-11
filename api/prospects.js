@@ -1,39 +1,5 @@
-const mongoose = require('mongoose');
-const { connectDB } = require('./_db');
+const { connectDB, Prospect } = require('./_db');
 const { verifyToken } = require('./_auth');
-
-const prospectSchema = new mongoose.Schema({
-  name:          String,
-  business_type: String,
-  zone:          String,
-  city:          String,
-  address:       String,
-  phone:         String,
-  email:         String,
-  website:       String,
-  rating:        Number,
-  source:        String,
-  data_score:    { type: Number, default: 0 },
-  notes:         String,
-  stage:         { type: String, default: 'por_llamar' },
-  pain_points: [{
-    title:       String,
-    description: String,
-    severity:    Number,
-    category:    String
-  }],
-  website_analysis: mongoose.Schema.Types.Mixed,
-  calls: [{
-    outcome:     String,
-    notes:       String,
-    next_action: String,
-    called_at:   { type: Date, default: Date.now }
-  }],
-  scraped_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now }
-});
-
-const Prospect = mongoose.models.Prospect || mongoose.model('Prospect', prospectSchema, 'prospects');
 
 module.exports = async function handler(req, res) {
   if (!verifyToken(req)) return res.status(401).json({ error: 'Unauthorized' });

@@ -261,6 +261,24 @@ body { font-family:'Segoe UI',sans-serif; background:#0f1419; color:white; min-h
 .prosp-stat { background:#1a2233; border:1px solid rgba(255,255,255,0.07); border-radius:8px; padding:12px; text-align:center; }
 .prosp-stat strong { display:block; font-size:1.4rem; font-weight:800; }
 .prosp-stat span { font-size:0.65rem; color:#888; text-transform:uppercase; letter-spacing:.8px; }
+
+.search-box {
+  background:#1a2233; border:1px solid rgba(255,193,7,0.2); border-radius:10px;
+  padding:16px 20px; margin-bottom:20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+}
+.search-box select {
+  padding:8px 12px; background:#090f15; border:1px solid rgba(255,193,7,0.2);
+  border-radius:6px; color:white; font-size:0.82rem; outline:none; cursor:pointer;
+}
+.search-box select:focus { border-color:#ffc107; }
+.btn-search {
+  padding:9px 20px; background:#ffc107; color:#0f1419;
+  border:none; border-radius:6px; font-weight:800; font-size:0.82rem;
+  cursor:pointer; transition:.2s; white-space:nowrap;
+}
+.btn-search:hover { background:#ffb300; }
+.btn-search:disabled { opacity:.5; cursor:not-allowed; }
+.search-status { font-size:0.78rem; color:#888; flex:1; min-width:160px; }
 </style>
 </head>
 <body>
@@ -589,6 +607,43 @@ async function loadProspectos() {
   renderProspectosPanel();
 }
 
+async function buscarClientes() {
+  const city = document.getElementById('scrapeCity').value;
+  const business_type = document.getElementById('scrapeBizType').value;
+  if (!city || !business_type) { alert('Selecciona ciudad y tipo de negocio.'); return; }
+
+  const btn = document.getElementById('scrapeBtn');
+  const status = document.getElementById('scrapeStatus');
+  btn.disabled = true;
+  btn.textContent = '🔍 Buscando...';
+  status.textContent = 'Consultando directorio OpenStreetMap...';
+  status.style.color = '#ffc107';
+
+  try {
+    const r = await apiFetch('/api/scrape', { method: 'POST', body: { city, business_type } });
+    const data = await r.json();
+    if (data.success) {
+      status.textContent = `✓ ${data.found} encontrados en ${data.city} · ${data.new} nuevos agregados`;
+      status.style.color = '#4ade80';
+      if (data.new > 0) {
+        // Reload prospects
+        const r2 = await apiFetch('/api/prospects');
+        const { prospects } = await r2.json();
+        allProspectos = prospects;
+        filterProspectos();
+      }
+    } else {
+      status.textContent = '✗ ' + (data.error || 'Error al buscar');
+      status.style.color = '#f87171';
+    }
+  } catch {
+    status.textContent = '✗ Error de conexión';
+    status.style.color = '#f87171';
+  }
+  btn.disabled = false;
+  btn.textContent = '🔍 Buscar clientes';
+}
+
 function renderProspectosPanel() {
   const counts = {};
   ALL_STAGES.forEach(s => counts[s.id] = 0);
@@ -599,6 +654,37 @@ function renderProspectosPanel() {
     <div class="prosp-stats">
       <div class="prosp-stat"><strong style="color:#ffc107">${total}</strong><span>Total</span></div>
       ${STAGES.map(s => `<div class="prosp-stat"><strong style="color:${s.color}">${counts[s.id]}</strong><span>${s.label}</span></div>`).join('')}
+    </div>
+    <div class="search-box">
+      <span style="color:#ffc107;font-weight:700;font-size:0.82rem;white-space:nowrap">🔍 Buscar nuevos clientes:</span>
+      <select id="scrapeCity">
+        <option value="">Ciudad...</option>
+        <option value="naranjo">Naranjo</option>
+        <option value="palmares">Palmares</option>
+        <option value="san_ramon">San Ramón</option>
+        <option value="grecia">Grecia</option>
+        <option value="sarchi">Sarchí</option>
+        <option value="atenas">Atenas</option>
+        <option value="zarcero">Zarcero</option>
+        <option value="san_carlos">San Carlos</option>
+        <option value="upala">Upala</option>
+        <option value="los_chiles">Los Chiles</option>
+      </select>
+      <select id="scrapeBizType">
+        <option value="">Tipo de negocio...</option>
+        <option value="hoteles">Hoteles y Hospedajes</option>
+        <option value="restaurantes">Restaurantes</option>
+        <option value="hospitales">Hospitales y Clínicas</option>
+        <option value="farmacias">Farmacias</option>
+        <option value="escuelas">Escuelas y Colegios</option>
+        <option value="gasolineras">Gasolineras</option>
+        <option value="supermercados">Supermercados</option>
+        <option value="bancos">Bancos</option>
+        <option value="talleres">Talleres Mecánicos</option>
+        <option value="ferreterias">Ferreterías</option>
+      </select>
+      <button class="btn-search" id="scrapeBtn" onclick="buscarClientes()">🔍 Buscar clientes</button>
+      <span class="search-status" id="scrapeStatus">Selecciona una ciudad y tipo de negocio para buscar prospectos automáticamente.</span>
     </div>`;
 
   const controlsHtml = `

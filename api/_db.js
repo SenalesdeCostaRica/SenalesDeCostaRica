@@ -26,7 +26,34 @@ const messageSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-const Lead    = mongoose.models.Lead    || mongoose.model('Lead',    leadSchema,    'leads');
-const Message = mongoose.models.Message || mongoose.model('Message', messageSchema, 'messages');
+const prospectSchema = new mongoose.Schema({
+  name:          String,
+  business_type: String,
+  zone:          String,
+  city:          String,
+  address:       String,
+  phone:         String,
+  email:         String,
+  website:       String,
+  rating:        Number,
+  source:        String,
+  data_score:    { type: Number, default: 0 },
+  notes:         String,
+  stage:         { type: String, default: 'por_llamar' },
+  pain_points: [{
+    title: String, description: String, severity: Number, category: String
+  }],
+  website_analysis: mongoose.Schema.Types.Mixed,
+  calls: [{
+    outcome: String, notes: String, next_action: String,
+    called_at: { type: Date, default: Date.now }
+  }],
+  scraped_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now }
+});
 
-module.exports = { connectDB, Lead, Message };
+const Lead     = mongoose.models.Lead     || mongoose.model('Lead',     leadSchema,     'leads');
+const Message  = mongoose.models.Message  || mongoose.model('Message',  messageSchema,  'messages');
+const Prospect = mongoose.models.Prospect || mongoose.model('Prospect', prospectSchema, 'prospects');
+
+module.exports = { connectDB, Lead, Message, Prospect };
